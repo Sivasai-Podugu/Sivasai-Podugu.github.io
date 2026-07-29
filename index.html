@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
   <meta charset="UTF-8">
@@ -177,6 +177,65 @@
       --radius-sm: 10px;
       --maxw: 1180px;
       --ease: cubic-bezier(.16, .84, .44, 1);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg-soft: #f1f5f9;
+      --surface: #ffffff;
+      --surface-strong: #ffffff;
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.16);
+      --text: #0f172a;
+      --text-dim: #334155;
+      --text-faint: #64748b;
+      --violet: #7c3aed;
+      --cyan: #0284c7;
+      --emerald: #059669;
+      --amber: #d97706;
+      --grad: linear-gradient(120deg, #7c3aed, #0284c7);
+      --grad-soft: linear-gradient(120deg, rgba(124, 58, 237, 0.1), rgba(2, 132, 199, 0.1));
+    }
+
+    [data-theme="light"] #siteHeader {
+      background: rgba(248, 250, 252, 0.88);
+      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    [data-theme="light"] .nav-links {
+      background: rgba(15, 23, 42, 0.05);
+      border: 1px solid rgba(15, 23, 42, 0.1);
+    }
+
+    [data-theme="light"] .nav-links a {
+      color: #475569;
+    }
+
+    [data-theme="light"] .nav-links a.active {
+      color: #0f172a;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    [data-theme="light"] .mobile-menu {
+      background: rgba(248, 250, 252, 0.96);
+    }
+
+    [data-theme="light"] .contact-item {
+      background: #ffffff;
+      border: 1px solid rgba(15, 23, 42, 0.12);
+      color: #0f172a;
+    }
+
+    [data-theme="light"] .contact-icon {
+      background: rgba(15, 23, 42, 0.06);
+    }
+
+    [data-theme="light"] .field input,
+    [data-theme="light"] .field textarea {
+      background: #ffffff;
+      color: #0f172a;
+      border: 1px solid rgba(15, 23, 42, 0.16);
     }
 
     * {
@@ -464,6 +523,47 @@
       box-shadow: inset 0 0 0 1px var(--border-strong);
     }
 
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .theme-toggle {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color .25s, transform .25s var(--ease), background .25s;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--cyan);
+      transform: translateY(-2px);
+    }
+
+    .theme-toggle .sun-icon {
+      display: none;
+    }
+
+    .theme-toggle .moon-icon {
+      display: block;
+    }
+
+    [data-theme="light"] .theme-toggle .sun-icon {
+      display: block;
+    }
+
+    [data-theme="light"] .theme-toggle .moon-icon {
+      display: none;
+    }
+
     .nav-cta {
       font-size: 0.85rem;
       font-weight: 600;
@@ -471,6 +571,7 @@
       border-radius: 999px;
       border: 1px solid var(--border-strong);
       background: var(--surface);
+      color: var(--text);
       transition: transform .25s var(--ease), border-color .25s;
     }
 
@@ -1158,6 +1259,7 @@
       padding: 1px;
       background: var(--border);
       transition: background .35s;
+      overflow: hidden;
     }
 
     .proj-card:hover {
@@ -1167,12 +1269,39 @@
     .proj-inner {
       background: var(--bg-soft);
       border-radius: calc(var(--radius) - 1px);
-      padding: 28px;
       height: 100%;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      overflow: hidden;
       transition: transform .35s var(--ease);
+    }
+
+    .proj-img-wrap {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .proj-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s var(--ease);
+    }
+
+    .proj-card:hover .proj-img {
+      transform: scale(1.05);
+    }
+
+    .proj-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex-grow: 1;
     }
 
     .proj-card:hover .proj-inner {
@@ -1371,23 +1500,7 @@
       gap: 14px;
     }
 
-    .social-row a {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: border-color .25s, transform .25s var(--ease);
-    }
-
-    .social-row a:hover {
-      border-color: var(--cyan);
-      transform: translateY(-3px);
-    }
-
+    .social-row a,
     #toTop {
       width: 38px;
       height: 38px;
@@ -1398,7 +1511,14 @@
       align-items: center;
       justify-content: center;
       color: var(--text);
-      transition: border-color .25s, transform .25s var(--ease);
+      transition: border-color .25s, transform .25s var(--ease), color .25s, background .25s;
+    }
+
+    .social-row a:hover,
+    #toTop:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      transform: translateY(-3px);
     }
 
     #toTop:hover {
@@ -1529,13 +1649,19 @@
         <a href="#credentials">Education & Certifications</a>
         <a href="#contact">Contact</a>
       </div>
-      <a href="#contact" class="nav-cta" id="talkHeaderBtn">Let's talk</a>
-      <button class="nav-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false"
-        aria-controls="mobileMenu">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle Light and Dark Theme">
+          <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="#contact" class="nav-cta" id="talkHeaderBtn">Let's talk</a>
+        <button class="nav-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false"
+          aria-controls="mobileMenu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
     </nav>
   </header>
 
@@ -1799,40 +1925,53 @@
         <div class="proj-grid reveal">
           <article class="proj-card">
             <div class="proj-inner">
-              <h3>Figma to Test Case Automation</h3>
-              <p>Developed an innovative application that automates the generation and execution of test cases directly
-                from Figma design flows using AI. Utilized React.js for user interface and Node.js for backend
-                automation processing.</p>
-              <div class="proj-tags"><span>React.js</span><span>Node.js</span><span>AI Automation</span></div>
+              <div class="proj-img-wrap">
+                <img src="assets/images/figma_automation.png" alt="Figma to Test Case Automation UI Preview" loading="lazy" class="proj-img">
+              </div>
+              <div class="proj-body">
+                <h3>Figma to Test Case Automation</h3>
+                <p>Developed an innovative application that automates the generation and execution of test cases directly from Figma design flows using AI. Utilized React.js for user interface and Node.js for backend automation processing.</p>
+                <div class="proj-tags"><span>React.js</span><span>Node.js</span><span>AI Automation</span></div>
+              </div>
             </div>
           </article>
 
           <article class="proj-card">
             <div class="proj-inner">
-              <h3>Payroll Management System</h3>
-              <p>Built an end-to-end enterprise platform to manage internal organizational payrolls, featuring an
-                interactive frontend and scalable backend APIs.</p>
-              <div class="proj-tags"><span>React.js</span><span>Spring
-                  Boot</span><span>MySQL</span><span>TypeScript</span></div>
+              <div class="proj-img-wrap">
+                <img src="assets/images/payroll_system.png" alt="Payroll Management System UI Preview" loading="lazy" class="proj-img">
+              </div>
+              <div class="proj-body">
+                <h3>Payroll Management System</h3>
+                <p>Built an end-to-end enterprise platform to manage internal organizational payrolls, featuring an interactive frontend and scalable backend APIs.</p>
+                <div class="proj-tags"><span>React.js</span><span>Spring Boot</span><span>MySQL</span><span>TypeScript</span></div>
+              </div>
             </div>
           </article>
 
           <article class="proj-card">
             <div class="proj-inner">
-              <h3>Edith</h3>
-              <p>Designed and implemented a real-time full-stack chat application enabling instantaneous communication
-                across dynamic contact lists.</p>
-              <div class="proj-tags"><span>React.js</span><span>Spring
-                  Boot</span><span>MySQL</span><span>TypeScript</span></div>
+              <div class="proj-img-wrap">
+                <img src="assets/images/edith_chat.png" alt="Edith Realtime Chat App UI Preview" loading="lazy" class="proj-img">
+              </div>
+              <div class="proj-body">
+                <h3>Edith Realtime Chat App</h3>
+                <p>Designed and implemented a real-time full-stack chat application enabling instantaneous communication across dynamic contact lists.</p>
+                <div class="proj-tags"><span>React.js</span><span>Spring Boot</span><span>MySQL</span><span>TypeScript</span></div>
+              </div>
             </div>
           </article>
 
           <article class="proj-card">
             <div class="proj-inner">
-              <h3>Ristorante ConFusion</h3>
-              <p>Developed a restaurant web platform using React.js for frontend view management and an integrated JSON
-                server backend to handle user authentication, menu browsing, and customer feedback workflows.</p>
-              <div class="proj-tags"><span>React.js</span><span>JSON Server</span><span>JavaScript</span></div>
+              <div class="proj-img-wrap">
+                <img src="assets/images/restaurant_fusion.png" alt="Ristorante ConFusion UI Preview" loading="lazy" class="proj-img">
+              </div>
+              <div class="proj-body">
+                <h3>Ristorante ConFusion</h3>
+                <p>Developed a restaurant web platform using React.js for frontend view management and an integrated JSON server backend to handle user authentication, menu browsing, and customer feedback workflows.</p>
+                <div class="proj-tags"><span>React.js</span><span>JSON Server</span><span>JavaScript</span></div>
+              </div>
             </div>
           </article>
         </div>
@@ -1982,7 +2121,7 @@
           <a class="contact-item" href="https://github.com/Sivasai-Podugu" target="_blank" rel="noopener"
             aria-label="GitHub profile">
             <div class="contact-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e7ebf5" stroke-width="2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path
                   d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
               </svg>
@@ -2024,20 +2163,20 @@
       <p>&copy; <span id="year"></span> Sivasai Podugu. Built with HTML, CSS & JavaScript.</p>
       <div class="social-row">
         <a href="https://github.com/Sivasai-Podugu" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e7ebf5" stroke-width="2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path
               d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
           </svg>
         </a>
         <a href="https://linkedin.com/in/sivasai-podugu" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e7ebf5" stroke-width="2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="2" y="9" width="4" height="12" />
             <circle cx="4" cy="4" r="2" />
             <path d="M10 9v12M10 13a4 4 0 0 1 8 0v8" />
           </svg>
         </a>
         <button id="toTop" aria-label="Back to top">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e7ebf5" stroke-width="2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 19V5M5 12l7-7 7 7" />
           </svg>
         </button>
@@ -2127,6 +2266,7 @@
     sections.forEach(s => s.id && io.observe(s));
 
     // scroll reveal
+
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -2244,6 +2384,20 @@
     function resetSubmitBtn() {
       submitBtn.disabled = false;
       btnText.textContent = 'Send Message';
+    }
+
+    // Light / Dark Theme Switcher (Default: Light Theme)
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+      const storedTheme = localStorage.getItem('theme');
+      let currentTheme = storedTheme || 'light';
+      document.documentElement.setAttribute('data-theme', currentTheme);
+
+      themeToggle.addEventListener('click', () => {
+        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        localStorage.setItem('theme', currentTheme);
+      });
     }
   </script>
 
